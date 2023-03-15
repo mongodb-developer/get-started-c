@@ -59,11 +59,13 @@ int main(int argc, char const *argv[]) {
    */
   collection = mongoc_client_get_collection(client, "sample_mflix", "movies");
 
+  // we create a new BSON Document
   doc = bson_new();
   bson_oid_init(&oid, NULL);
   BSON_APPEND_OID(doc, "_id", &oid);
   BSON_APPEND_UTF8(doc, "name", "My super new picture");
 
+  // Then we insert it in the movies collection
   if (!mongoc_collection_insert_one(collection, doc, NULL, NULL, &error)) {
     fprintf(stderr, "%s\n", error.message);
   } else {
