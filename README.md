@@ -1,4 +1,4 @@
-# Hello, MongoC
+# Getting Started with the MongoDB C Driver
 
 Some simple examples using the [MongoDB C driver](https://www.mongodb.com/docs/drivers/c/)
 
