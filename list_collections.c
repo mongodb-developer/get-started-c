@@ -54,8 +54,9 @@ int main(int argc, char const *argv[]) {
    */
   database = mongoc_client_get_database(client, "sample_mflix");
 
-  if ((collection_names =
-           mongoc_database_get_collection_names(database, &error))) {
+  // getting all collection names, here we're not passing in any options
+  if ((collection_names = mongoc_database_get_collection_names_with_opts(
+           database, NULL, &error))) {
     for (i = 0; collection_names[i]; i++) {
       printf("%s\n", collection_names[i]);
     }
