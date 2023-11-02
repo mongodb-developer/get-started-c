@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]) {
 
   while (mongoc_cursor_next(cursor, &query)) {
     str = bson_as_canonical_extended_json(query, NULL);
-    printf("%s\n", str);
+    printf("%s\n\n", str);
     bson_free(str);
   }
 

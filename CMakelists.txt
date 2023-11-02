@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.15)
+
+project (get_started_c LANGUAGES C)
+
+# Find the MongoDB C Driver package
+# NOTE: For this to work, the CMAKE_PREFIX_PATH variable must be set to point to
+# the directory where libmongoc is installed.
+find_package (mongoc-1.0 REQUIRED)
+
+# Your project sources
+set(SOURCES
+    bcon.c
+    delete.c
+    find.c
+    hello_mongoc.c
+    insert.c
+    list_collections.c
+    update.c
+    # Add other source files here
+)
+
+# Loop through each source file
+foreach(source_file IN LISTS SOURCES)
+    # Get the name of the file without the extension (e.g. 'bcon' from 'bcon.c'
+    get_filename_component(target_name ${source_file} NAME_WE)
+    # Create an executable with the above name, building the above source
+    add_executable("${target_name}" "${source_file}")
+    # Link against the MongoDB C Driver (libmongoc)
+    target_link_libraries("${target_name}" PRIVATE mongo::mongoc_shared)
+endforeach()
