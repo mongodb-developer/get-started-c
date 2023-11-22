@@ -24,6 +24,7 @@ int main(int argc, char const *argv[]) {
   // document to update and query to find it
   bson_t *update = NULL;
   bson_t *query = NULL;
+  mongoc_cursor_t *cursor = NULL;
   char *str;
 
   /*
@@ -91,8 +92,13 @@ int main(int argc, char const *argv[]) {
       fprintf(stderr, "%s\n", error.message);
     } else {
       printf("Document edited!\n");
-      str = bson_as_canonical_extended_json(update, NULL);
-      printf("%s\n", str);
+      // Find and print the updated document.
+      cursor = mongoc_collection_find_with_opts(collection, query, NULL, NULL);
+      while (mongoc_cursor_next(cursor, &query)) {
+        str = bson_as_canonical_extended_json(query, NULL);
+        printf("%s\n\n", str);
+        bson_free(str);
+      }
     }
   }
 
