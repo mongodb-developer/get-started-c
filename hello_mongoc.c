@@ -68,13 +68,14 @@ int main(int argc, char const *argv[]) {
   // mongoc_client_command_simple returns false and sets error if there are
   // invalid arguments or a server or network error.
   if (!retval) {
-    fprintf(stderr, "%s\n", error.message);
+     printf("Error: %s\n", error.message);
     return EXIT_FAILURE;
   }
 
   // if we're here, there's a JSON response
   str = bson_as_json(&reply, NULL);
   printf("%s\n", str);
+  printf("Pinged your deployment. You successfully connected to MongoDB!\n");
 
   /*
    * Clean up memory
