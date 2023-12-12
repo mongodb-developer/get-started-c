@@ -60,7 +60,7 @@ int main(int argc, char const *argv[]) {
     for (i = 0; collection_names[i]; i++) {
       printf("%s\n", collection_names[i]);
     }
-
+    bson_strfreev (collection_names);
   } else {
     fprintf(stderr, "Error: %s\n", error.message);
     return EXIT_FAILURE;
