@@ -81,6 +81,7 @@ int main(int argc, char const *argv[]) {
 
   bson_destroy(query);
 
+  mongoc_cursor_destroy(cursor);
   mongoc_collection_destroy(collection);
   mongoc_uri_destroy(uri);
   mongoc_client_destroy(client);
