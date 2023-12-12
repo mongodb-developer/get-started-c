@@ -78,6 +78,8 @@ int main(int argc, char const *argv[]) {
     bson_free(str);
   }
 
+  bson_destroy (doc);
+
   /*
    * Release our handles and clean up libmongoc
    */
