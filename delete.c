@@ -90,6 +90,8 @@ int main(int argc, char const *argv[]) {
     puts("Document deleted!");
   }
 
+  bson_destroy(doc);
+
   /*
    * Release our handles and clean up libmongoc
    */

@@ -21,6 +21,9 @@ int main(int argc, char const *argv[]) {
   bson_t *query;
   mongoc_cursor_t *cursor;
 
+  // Found document
+  const bson_t *found;
+
   char *str;
 
   /*
@@ -66,8 +69,8 @@ int main(int argc, char const *argv[]) {
   BSON_APPEND_INT32(query, "year", 1984);
   cursor = mongoc_collection_find_with_opts(collection, query, NULL, NULL);
 
-  while (mongoc_cursor_next(cursor, &query)) {
-    str = bson_as_canonical_extended_json(query, NULL);
+  while (mongoc_cursor_next(cursor, &found)) {
+    str = bson_as_canonical_extended_json(found, NULL);
     printf("%s\n\n", str);
     bson_free(str);
   }
@@ -78,6 +81,7 @@ int main(int argc, char const *argv[]) {
 
   bson_destroy(query);
 
+  mongoc_cursor_destroy(cursor);
   mongoc_collection_destroy(collection);
   mongoc_uri_destroy(uri);
   mongoc_client_destroy(client);

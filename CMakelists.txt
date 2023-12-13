@@ -21,7 +21,7 @@ set(SOURCES
 
 # Loop through each source file
 foreach(source_file IN LISTS SOURCES)
-    # Get the name of the file without the extension (e.g. 'bcon' from 'bcon.c'
+    # Get the name of the file without the extension (e.g. 'bcon' from 'bcon.c')
     get_filename_component(target_name ${source_file} NAME_WE)
     # Create an executable with the above name, building the above source
     add_executable("${target_name}" "${source_file}")
